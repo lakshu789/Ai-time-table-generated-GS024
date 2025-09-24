@@ -1,0 +1,39 @@
+import random
+
+# Sample data
+subjects = ["Math", "Science", "English", "History", "Art"]
+teachers = ["Mr. Smith", "Ms. Johnson", "Mrs. Lee", "Mr. Brown", "Ms. White"]
+rooms = ["Room 101", "Room 102", "Room 103", "Room 104", "Room 105"]
+timeslots = [
+    "Monday 9AM", "Monday 10AM", "Monday 11AM",
+    "Tuesday 9AM", "Tuesday 10AM", "Tuesday 11AM",
+    "Wednesday 9AM", "Wednesday 10AM", "Wednesday 11AM"
+]
+
+# Timetable dictionary: timeslot -> (subject, teacher, room)
+timetable = {}
+
+used_teachers = set()
+used_rooms = set()
+
+for timeslot in timeslots:
+    # Randomly select subject, teacher, room
+    subject = random.choice(subjects)
+    teacher = random.choice([t for t in teachers if t not in used_teachers])
+    room = random.choice([r for r in rooms if r not in used_rooms])
+
+    # Assign and update used sets
+    timetable[timeslot] = (subject, teacher, room)
+    used_teachers.add(teacher)
+    used_rooms.add(room)
+
+    # Reset used sets after all are used once (simple round-robin)
+    if len(used_teachers) == len(teachers):
+        used_teachers.clear()
+    if len(used_rooms) == len(rooms):
+        used_rooms.clear()
+
+# Print timetable
+print("AI Generated Timetable:")
+for timeslot, (subject, teacher, room) in timetable.items():
+    print(f"{timeslot}: {subject} with {teacher} in {room}")

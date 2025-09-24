@@ -1,0 +1,21 @@
+# Simple AI Timetable Login System
+
+# Dummy user database
+users = {
+    "student1": "password123",
+    "teacher1": "teachpass456"
+}
+
+def login():
+    print("Welcome to AI Timetable System")
+    username = input("Enter username:")
+    password = input("Enter password:")
+
+    if username in users and users[username] == password:
+        print(f"Login successful! Welcome, {username}.\n")
+        # Here you can add timetable logic or redirect to the dashboard
+    else:
+        print("Invalid username or password. Please try again.\n")
+
+if __name__ == "__main__":
+    login()
